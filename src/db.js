@@ -3,18 +3,27 @@ const { Sequelize, Op } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,PORT, DB_NAME
+  DB_USER, DB_PASSWORD, DB_HOST,PORT, DB_NAME, DATABASE_URL
 } = process.env;
 const isProduction = process.env.NODE_ENV === 'production'
 const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`
 
 
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`, { 
-const sequelize = new Sequelize(isProduction ? process.env.DATABASE_URL : connectionString, { 
+// const sequelize = new Sequelize(isProduction ? process.env.DATABASE_URL : connectionString, { 
 
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
+
+const sequelize =new Sequelize(process.env.DATABASE_URL,
+  {
+    dialect: "postgres",
+    protocol: "postgres",
+    port: 5432,
+    host: "<heroku host>",
+    logging: true //false
+ });
 
 sequelize.authenticate().then(()=>{
   console.log('success')
