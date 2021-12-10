@@ -9,7 +9,7 @@ const {
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`, { 
 
 //USAR LA SIGUIENTE CONFIGURACION PARA CORRER EN HEROKU
-const sequelize = new Sequelize(`postgres://${DATABASE_URL}`, {
+const sequelize = new Sequelize(`postgres://${process.env.DATABASE_URL}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
