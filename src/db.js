@@ -22,7 +22,10 @@ const sequelize =new Sequelize(process.env.DATABASE_URL,
     protocol: "postgres",
     port: 5432,
     host: "<heroku host>",
-    logging: true //false
+    logging: true, //false
+    ssl: {
+      rejectUnauthorized: false
+    }
  });
 
 sequelize.authenticate().then(()=>{
