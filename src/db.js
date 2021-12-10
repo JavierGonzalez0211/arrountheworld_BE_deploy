@@ -5,8 +5,11 @@ const path = require('path');
 const {
   DB_USER, DB_PASSWORD, DB_HOST,PORT, DB_NAME
 } = process.env;
+//USAR LA SIGUIENTE CONF PARA CORRER EN MODO LOCAL
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`, { 
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`, {
+//USAR LA SIGUIENTE CONFIGURACION PARA CORRER EN HEROKU
+const sequelize = new Sequelize(`postgres://${DATABASE_URL}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
